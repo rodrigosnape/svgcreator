@@ -1,5 +1,35 @@
-<select name="" id="">
-    <option value="">Triângulo</option>
-    <option value="">Quadrado</option>
-</select>
-<button>Desenhar</button>
+<form [formGroup]="retanguloForm">
+    <label for="X">X: </label>
+    <input 
+        type="number"
+        formControlName="posXRetangulo" 
+        value="0"
+    />
+    <label for="X">Y: </label>
+    <input 
+        type="number"
+        formControlName="posYRetangulo" 
+        value="0"
+    />
+    <label for="Largura">Largura: </label>
+    <input 
+        type="number"
+        formControlName="larguraRetangulo" 
+        value="0"
+    />
+     <label for="Largura">Altura: </label>
+    <input 
+        type="number"
+        formControlName="alturaRetangulo" 
+        value="0"
+    />
+    <label for="Largura">Curvas: </label>
+    <input 
+        type="number"
+        formControlName="curvaRetangulo" 
+        value="0"
+    />    
+    <button (click)="adicionarRetangulo()">Adicionar Retângulo</button>
+</form>
+
+<button>Adicionar Polígono</button>
