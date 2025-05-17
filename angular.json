@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "svg-temp": {
+    "svgcreator": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/svg-temp",
+            "outputPath": "dist/svgcreator",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "svg-temp:build:production"
+              "buildTarget": "svgcreator:build:production"
             },
             "development": {
-              "buildTarget": "svg-temp:build:development"
+              "buildTarget": "svgcreator:build:development"
             }
           },
           "defaultConfiguration": "development"
