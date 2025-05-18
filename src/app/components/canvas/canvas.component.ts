@@ -10,6 +10,8 @@ export class CanvasComponent {
   retangulos: Retangulo[] = [];
   estrelas: Estrela[] = [];
 
+  elementoSelecionado: HTMLElement | null = null;
+
   constructor(private desenhoService: DesenhoService) {
 
     this.desenhoService.retangulos$.subscribe((retangulos: Retangulo[]) => {
@@ -28,10 +30,25 @@ export class CanvasComponent {
       event.stopPropagation();
       this.desenhoService.selecionarRetangulo(id);
 
-      this.desenhoService.selecionarEstrela(id);
+       this.elementoSelecionado?.classList.remove('selecionado');
+
+      this.elementoSelecionado = event.target as HTMLElement; 
+
+      this.elementoSelecionado.classList.add('selecionado');
     }
 
-    editarEstrela(event:Event,id:string) {}
+    editarEstrela(event:Event,id:string) {
+      event.stopPropagation();
+      this.desenhoService.selecionarEstrela(id);
+
+      this.elementoSelecionado?.classList.remove('selecionado');
+
+      this.elementoSelecionado = event.target as HTMLElement; 
+
+      this.elementoSelecionado.classList.add('selecionado');
+
+      console.log(event.target);
+    }
 
     pegarPosicao(event: MouseEvent) {
       const canvas = event.target as HTMLCanvasElement;

@@ -6,6 +6,11 @@
     
 }
 
-svg rect{
+.selecionado{
+    filter: drop-shadow(10px 10px 5px #aaa);
+}
+
+svg rect,
+svg polygon{
     cursor: pointer;
 }

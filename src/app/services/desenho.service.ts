@@ -78,8 +78,22 @@ export class DesenhoService {
   }
 
   gerarPontosEstrela(estrela: Estrela):string {
-    const pontos = "150,50 179.4,111.8  247.6,119.1 195.5,168.2 207.1,236.5 150,200 92.9,236.5 104.5,168.2 52.4,119.1 120.6,111.8";
-    return pontos;
+
+    const pontos: string[] = [];
+    const anguloInicial = -Math.PI / 2;
+    const totalPontos = estrela.quantPontas * 2;
+
+    for (let i = 0; i < totalPontos; i++) {
+      const angulo = anguloInicial + (i * Math.PI) / estrela.quantPontas;
+      const raio = i % 2 === 0 ? estrela.raioExterno : estrela.raioInterno;
+      const x = estrela.posX + raio * Math.cos(angulo);
+      const y = estrela.posY + raio * Math.sin(angulo);
+      pontos.push(`${x},${y}`);
+    }
+
+
+    //const pontos = "150,50 179.4,111.8  247.6,119.1 195.5,168.2 207.1,236.5 150,200 92.9,236.5 104.5,168.2 52.4,119.1 120.6,111.8";
+    return pontos.join(' ');
   }
 
   selecionarRetangulo(id: string) {
@@ -90,7 +104,13 @@ export class DesenhoService {
     }
   }
 
-  selecionarEstrela(id: string) {}
+  selecionarEstrela(id: string) {
+      const encontrada = this.estrelasLista.getValue().find(r => r.id === id);
+    if (encontrada) {
+      this.estrelaSelecionada.next(encontrada);
+      console.log('estrelaSelecionada', id);
+    }
+  }
 
   resetarRetanguloSelecionado() {
     console.log(this.retanguloSelecionado);
@@ -100,34 +120,64 @@ export class DesenhoService {
 
   
 
-editarRetangulo(id: string, novosDados: Retangulo) {
-  const lista = this.retangulosLista.getValue();
-  const index = lista.findIndex(r => r.id === id);
+  editarRetangulo(id: string, novosDados: Retangulo) {
+    const lista = this.retangulosLista.getValue();
+    const index = lista.findIndex(r => r.id === id);
 
-  if (index !== -1) {
-    const retanguloAtualizado = {
-      ...lista[index],
-      posX: novosDados.posX,
-      posY: novosDados.posY,
-      largura: novosDados.largura,
-      altura: novosDados.altura,
-      curva: novosDados.curva,
-      cor: novosDados.cor,
-      borda: novosDados.borda,
-      espessura: novosDados.espessura
-    };
+    if (index !== -1) {
+      const retanguloAtualizado = {
+        ...lista[index],
+        posX: novosDados.posX,
+        posY: novosDados.posY,
+        largura: novosDados.largura,
+        altura: novosDados.altura,
+        curva: novosDados.curva,
+        cor: novosDados.cor,
+        borda: novosDados.borda,
+        espessura: novosDados.espessura
+      };
 
-    const novaLista = [...lista];
-    novaLista[index] = retanguloAtualizado;
+      const novaLista = [...lista];
+      novaLista[index] = retanguloAtualizado;
 
-    this.retangulosLista.next(novaLista);
-    this.retanguloSelecionado.next(retanguloAtualizado);
+      this.retangulosLista.next(novaLista);
+      this.retanguloSelecionado.next(retanguloAtualizado);
 
-    console.log('retanguloEditado', retanguloAtualizado);
+      console.log('retanguloEditado', retanguloAtualizado);
+    }
   }
-}
 
-  editarEstrela(id: string, novosDados: Estrela){}
+  editarEstrela(id: string, novosDados: Estrela){
+    const lista = this.estrelasLista.getValue();
+    const index = lista.findIndex(r => r.id === id);
+
+    if (index !== -1) {
+      const estrelaAtualizada = {
+        ...lista[index],
+        posX: novosDados.posX,
+        posY: novosDados.posY,
+        raioInterno: novosDados.raioInterno,
+        raioExterno: novosDados.raioExterno,
+        quantPontas: novosDados.quantPontas,
+        profundidade: novosDados.profundidade,
+        pontos: novosDados.pontos,
+        cor: novosDados.cor,
+        borda: novosDados.borda,
+        espessura: novosDados.espessura
+      };
+
+      //É necessário gerar os pontos novamente
+      estrelaAtualizada.pontos = this.gerarPontosEstrela(estrelaAtualizada);
+
+      const novaLista = [...lista];
+      novaLista[index] = estrelaAtualizada;
+
+      this.estrelasLista.next(novaLista);
+      this.estrelaSelecionada.next(estrelaAtualizada);
+
+      console.log('estrelaEditada', estrelaAtualizada);
+    }
+  }
 
 
 
@@ -140,7 +190,14 @@ editarRetangulo(id: string, novosDados: Retangulo) {
     this.retanguloSelecionado.next(null);
   }
 
-  removerEstrela(id: string) {}
+  removerEstrela(id: string) {
+    const listaAtual = this.estrelasLista.getValue();
+    const novaLista = listaAtual.filter(r => r.id !== id);
+
+    this.estrelasLista.next(novaLista);
+
+    this.estrelaSelecionada.next(null);
+  }
 }
 
 
