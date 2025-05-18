@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DesenhoService, Retangulo } from '../../services/desenho.service';
 
 @Component({
   selector: 'app-canvas',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrl: './canvas.component.css'
 })
 export class CanvasComponent {
+  retangulos: Retangulo[] = [];
 
-}
+  constructor(private desenhoService: DesenhoService) {
+
+    this.desenhoService.retangulos$.subscribe((retangulos: Retangulo[]) => {
+      this.retangulos = retangulos;
+    });
+
+  }
+
+    editarRetangulo(id:string) {
+      this.desenhoService.selecionarRetangulo(id);
+    }
+
+  }

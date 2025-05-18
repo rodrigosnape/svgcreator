@@ -3,4 +3,9 @@
     border-radius: 20px;
     filter: drop-shadow(0 0 3px gray);
     background-color: white;
+    padding: 20px;
+}
+
+svg{
+    cursor: pointer;
 }

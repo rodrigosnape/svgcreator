@@ -12,7 +12,7 @@ label {
   
 }
 
-input[type="number"] {
+input {
   width: 50px;
   padding: 0.3rem 0.5rem;
   border: 1px solid #ccc;
@@ -21,7 +21,7 @@ input[type="number"] {
   transition: border-color 0.2s;
 }
 
-input[type="number"]:focus {
+input:focus {
   border-color: #007BFF;
   outline: none;
   box-shadow: 0 0 5px rgba(0,123,255,0.5);
@@ -29,7 +29,7 @@ input[type="number"]:focus {
 
 button {
   padding: 0.5rem 1rem;
-  background-color: #007BFF;
+  
   color: white;
   border: none;
   border-radius: 4px;
@@ -38,8 +38,20 @@ button {
   transition: background-color 0.3s;
 }
 
+.adicionar{
+  background-color: #007BFF;
+}
+
+.editar{
+  background-color: #28a745;
+}
+
+.remover{
+  background-color: #dc3545;
+}
+
 button:hover {
-  background-color: #0056b3;
+  opacity: 0.6;
 }
 
 select {

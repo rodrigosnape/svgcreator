@@ -15,17 +15,34 @@ export class MenuComponent implements OnInit {
   constructor(private desenhoService: DesenhoService) {}
 
   ngOnInit(): void {
-  this.retanguloForm = new FormGroup({
-      posXRetangulo: new FormControl(0, Validators.required),
-      posYRetangulo: new FormControl(0, Validators.required),
-      larguraRetangulo: new FormControl(100, Validators.required),
-      alturaRetangulo: new FormControl(50, Validators.required),
-      curvaRetangulo: new FormControl(0, Validators.required),
+    this.retanguloForm = new FormGroup({
+        idRetangulo: new FormControl,
+        posXRetangulo: new FormControl(0, Validators.required),
+        posYRetangulo: new FormControl(0, Validators.required),
+        larguraRetangulo: new FormControl(100, Validators.required),
+        alturaRetangulo: new FormControl(50, Validators.required),
+        curvaRetangulo: new FormControl(0, Validators.required),
     });
+
+
+    this.desenhoService.retanguloSelecionado$.subscribe(ret => {
+      if (ret) {
+        this.retanguloForm.patchValue({
+          idRetangulo: ret.id,
+          posXRetangulo: ret.posX,
+          posYRetangulo: ret.posY,
+          larguraRetangulo: ret.largura,
+          alturaRetangulo: ret.altura,
+          curvaRetangulo: ret.curva,
+        });
+      }
+    });
+
   }
 
   adicionarRetangulo() {
       const retangulo: Retangulo = {
+      id: '',
       tipo: 'retangulo',
       posX: this.retanguloForm.value.posXRetangulo,
       posY: this.retanguloForm.value.posYRetangulo,
@@ -35,6 +52,11 @@ export class MenuComponent implements OnInit {
     };
 
     this.desenhoService.adicionarRetangulo(retangulo);
+  }
+
+  removerRetangulo() {
+    this.desenhoService.removerRetangulo(this.retanguloForm.value.idRetangulo);
+
   }
 
 

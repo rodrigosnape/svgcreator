@@ -4,18 +4,42 @@
 
 <svg id=tela width="1200" height="420">
   
-    <rect 
-        x="50" 
-        y="20" 
-        rx="20" 
-        ry="20" 
-        width="150" 
-        height="150"
-    
-        style="fill:red;
-        stroke:black;
-        stroke-width:5;" 
-    />
+
+  <rect 
+    *ngFor="let ret of retangulos"
+    [attr.id]="ret.id"
+    [attr.x]="ret.posX"
+    [attr.y]="ret.posY"
+    [attr.width]="ret.largura"
+    [attr.height]="ret.altura"
+    [attr.rx]="ret.curva"
+    [attr.ry]="ret.curva"
+    fill="#4CAF50"
+    stroke="#ccc"
+    stroke-width="5"
+    (click)="editarRetangulo(ret.id)"
+  />
+
+
 
 </svg>
+<!---
+<svg id="tela" width="1200" height="420">
+  <rect 
+    *ngFor="let ret of retangulos" 
+    [attr.x]="ret.posX"
+    [attr.y]="ret.posY"
+    [attr.width]="ret.largura"
+    [attr.height]="ret.altura"
+    [attr.rx]="ret.curva"
+    [attr.ry]="ret.curva"
+    fill="skyblue"
+    stroke="black"
+    stroke-width="2"
+    [attr.id]="'retangulo-' + ret.id"
+    (click)="editarRetangulo()"
+    style="cursor: pointer;"
+  ></rect>
+</svg>-->
+
 

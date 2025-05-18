@@ -1,4 +1,10 @@
 <form [formGroup]="retanguloForm">
+    <input 
+        type="text" 
+        formControlName="idRetangulo"
+        value=""
+        readonly
+    />
     <label for="X">X: </label>
     <input 
         type="number"
@@ -25,11 +31,16 @@
     />
     <label for="Largura">Curvas: </label>
     <input 
-        type="number"
+        type="range"
+        min="0"
+        max="50"
+        step="5"
         formControlName="curvaRetangulo" 
         value="0"
     />    
-    <button (click)="adicionarRetangulo()">Adicionar Retângulo</button>
+    <button class="adicionar" (click)="adicionarRetangulo()">Adicionar Retângulo</button>
+    <!--<button class="editar" (click)="editarRetangulo(1)">Editar Retângulo</button>-->
+    <button class="remover" (click)="removerRetangulo()">Remover Retângulo</button>
 </form>
 
-<button>Adicionar Polígono</button>
+<button class="adicionar">Adicionar Polígono</button>
