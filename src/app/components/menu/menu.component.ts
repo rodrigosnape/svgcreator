@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
         curvaRetangulo: new FormControl(0, Validators.required),
         corRetangulo: new FormControl("#0B9827", Validators.required),
         bordaRetangulo: new FormControl("#000000", Validators.required),
-        espessuraRetangulo: new FormControl(5, Validators.required),
+        espessuraRetangulo: new FormControl(3, Validators.required),
     });
 
     this.estrelaForm = new FormGroup({
@@ -43,7 +43,7 @@ export class MenuComponent implements OnInit {
         profundidadeEstrela: new FormControl(0, Validators.required),
         corEstrela: new FormControl("#DED717", Validators.required),
         bordaEstrela: new FormControl("#000000", Validators.required),
-        espessuraEstrela: new FormControl(5, Validators.required),
+        espessuraEstrela: new FormControl(3, Validators.required),
     });
 
 
@@ -197,7 +197,7 @@ export class MenuComponent implements OnInit {
           curvaRetangulo: 0,
           corRetangulo: '#0B9827',
           bordaRetangulo: '#000000',
-          espessuraRetangulo: 5,
+          espessuraRetangulo: 3,
         });
         this.retanguloSelecionado = false;
       break;
@@ -213,7 +213,7 @@ export class MenuComponent implements OnInit {
           corEstrela: '#DED717',
           bordaEstrela: '#000000',
           profundidadeEstrela: 0,
-          espessuraEstrela: 5,
+          espessuraEstrela: 3,
         });
         this.estrelaSelecionada = false;
       break;   

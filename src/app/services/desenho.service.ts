@@ -83,9 +83,14 @@ export class DesenhoService {
     const anguloInicial = -Math.PI / 2;
     const totalPontos = estrela.quantPontas * 2;
 
+    const profundidade = estrela.profundidade / 100;
+
+    const raioInterno = estrela.raioInterno - (estrela.raioInterno * profundidade);
+
+
     for (let i = 0; i < totalPontos; i++) {
       const angulo = anguloInicial + (i * Math.PI) / estrela.quantPontas;
-      const raio = i % 2 === 0 ? estrela.raioExterno : estrela.raioInterno;
+      const raio = i % 2 === 0 ? estrela.raioExterno : raioInterno;
       const x = estrela.posX + raio * Math.cos(angulo);
       const y = estrela.posY + raio * Math.sin(angulo);
       pontos.push(`${x},${y}`);
