@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DesenhoService, Retangulo } from '../../services/desenho.service';
+import { DesenhoService, Estrela, Retangulo } from '../../services/desenho.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,10 +10,14 @@ import { DesenhoService, Retangulo } from '../../services/desenho.service';
 export class MenuComponent implements OnInit {
 
   retanguloForm!: FormGroup;
-  formBuilder: any;
+
   retanguloSelecionado: boolean = false;
 
-  abaSelecionada: string = 'retangulo';
+  abaSelecionada: string = 'estrela';
+
+
+  estrelaForm!: FormGroup;
+  estrelaSelecionada: boolean = false;
   
 
   constructor(private desenhoService: DesenhoService) {}
@@ -29,6 +33,19 @@ export class MenuComponent implements OnInit {
         corRetangulo: new FormControl(0, Validators.required),
         bordaRetangulo: new FormControl(0, Validators.required),
         espessuraRetangulo: new FormControl(0, Validators.required),
+    });
+
+    this.estrelaForm = new FormGroup({
+        idEstrela: new FormControl,
+        posXEstrela: new FormControl(0, Validators.required),
+        posYEstrela: new FormControl(0, Validators.required),
+        quantPontasEstrela: new FormControl(5, Validators.required),
+        raioInternoEstrela: new FormControl(50, Validators.required),
+        raioExternoEstrela: new FormControl(100, Validators.required),
+        profundidadeEstrela: new FormControl(0, Validators.required),
+        corEstrela: new FormControl(0, Validators.required),
+        bordaEstrela: new FormControl(0, Validators.required),
+        espessuraEstrela: new FormControl(0, Validators.required),
     });
 
 
@@ -64,7 +81,6 @@ export class MenuComponent implements OnInit {
 
   }
 
-
   adicionarRetangulo() {
       const retangulo: Retangulo = {
       id: '',
@@ -80,6 +96,25 @@ export class MenuComponent implements OnInit {
     };
 
     this.desenhoService.adicionarRetangulo(retangulo);
+  }
+
+  adicionarEstrela() {
+    const estrela: Estrela = {
+      id: '',
+      tipo: 'estrela',
+      posX: this.estrelaForm.value.posXEstrela,
+      posY: this.estrelaForm.value.posYEstrela,
+      raioInterno: this.estrelaForm.value.raioInternoEstrela,
+      raioExterno: this.estrelaForm.value.raioExternoEstrela,
+      quantPontas: this.estrelaForm.value.quantPontasEstrela,
+      profundidade: this.estrelaForm.value.profundidadeEstrela,
+      pontos: '',
+      cor: this.estrelaForm.value.corEstrela,
+      borda: this.estrelaForm.value.bordaEstrela,
+      espessura: this.estrelaForm.value.espessuraEstrela
+    }
+
+    this.desenhoService.adicionarEstrela(estrela);
   }
 
   editarRetangulo() {
@@ -100,10 +135,14 @@ export class MenuComponent implements OnInit {
     this.resetarForm();
   }
 
+  editarEstrela() {}
+
   removerRetangulo() {
     this.desenhoService.removerRetangulo(this.retanguloForm.value.idRetangulo);
     this.resetarForm();
   }
+
+  removerEstrela(){}
 
   resetarForm() {
     this.retanguloForm.reset({

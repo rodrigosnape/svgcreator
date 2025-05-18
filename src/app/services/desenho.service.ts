@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 
 export interface Retangulo {
-  id: string,
+  id: string;
   tipo: 'retangulo';
   posX: number;
   posY: number;
@@ -15,6 +15,23 @@ export interface Retangulo {
   espessura: number;
 }
 
+export interface Estrela {
+  id:string;
+  tipo: 'estrela';
+  posX: number;
+  posY: number;
+  raioInterno: number;
+  raioExterno: number;
+  quantPontas: number;
+  profundidade: number;
+  pontos: string;
+  cor: string;
+  borda: string;
+  espessura: number;
+}
+  
+  
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,12 +40,16 @@ export interface Retangulo {
 export class DesenhoService {
 
   private retangulosLista = new BehaviorSubject<Retangulo[]>([]);
+  private estrelasLista = new BehaviorSubject<Estrela[]>([]);
 
   public retangulos$ = this.retangulosLista.asObservable();
+  public estrelas$ = this.estrelasLista.asObservable();
 
   private retanguloSelecionado = new BehaviorSubject<Retangulo | null>(null);
+  private estrelaSelecionada = new BehaviorSubject<Estrela | null>(null);
   
   public retanguloSelecionado$ = this.retanguloSelecionado.asObservable();
+  public estrelaSelecionada$ = this.estrelaSelecionada.asObservable();
 
 
   public posicaoInicial = new BehaviorSubject<{ x: number, y: number }>({ x: 0, y: 0 });
@@ -47,6 +68,20 @@ export class DesenhoService {
 
   }
 
+  adicionarEstrela(estrela: Estrela){
+    estrela.id = Math.random().toString(36).substring(2, 9);
+    estrela.pontos = this.gerarPontosEstrela(estrela);
+    const lista = this.estrelasLista.getValue();
+    const novaLista = [...lista, estrela];
+    this.estrelasLista.next(novaLista);
+    console.log('novaLista', novaLista);
+  }
+
+  gerarPontosEstrela(estrela: Estrela):string {
+    const pontos = "150,50 179.4,111.8  247.6,119.1 195.5,168.2 207.1,236.5 150,200 92.9,236.5 104.5,168.2 52.4,119.1 120.6,111.8";
+    return pontos;
+  }
+
   selecionarRetangulo(id: string) {
     const encontrado = this.retangulosLista.getValue().find(r => r.id === id);
     if (encontrado) {
@@ -54,6 +89,8 @@ export class DesenhoService {
       console.log('retanguloSelecionado', id);
     }
   }
+
+  selecionarEstrela(id: string) {}
 
   resetarRetanguloSelecionado() {
     console.log(this.retanguloSelecionado);
@@ -90,6 +127,8 @@ editarRetangulo(id: string, novosDados: Retangulo) {
   }
 }
 
+  editarEstrela(id: string, novosDados: Estrela){}
+
 
 
   removerRetangulo(id: string) {
@@ -100,6 +139,8 @@ editarRetangulo(id: string, novosDados: Retangulo) {
 
     this.retanguloSelecionado.next(null);
   }
+
+  removerEstrela(id: string) {}
 }
 
 

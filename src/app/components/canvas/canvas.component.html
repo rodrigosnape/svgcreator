@@ -1,11 +1,5 @@
-<svg 
-    id=tela 
-    width="1000" height="520"
-    (click)="pegarPosicao($event)"
-    >
-  
-
-  <rect 
+<svg id="tela" width="1000" height="520" (click)="pegarPosicao($event)">
+  <rect
     *ngFor="let ret of retangulos"
     [attr.id]="ret.id"
     [attr.x]="ret.posX"
@@ -17,29 +11,17 @@
     [attr.fill]="ret.cor"
     [attr.stroke]="ret.borda"
     [attr.stroke-width]="ret.espessura"
-    (click)="editarRetangulo($event,ret.id)"
+    (click)="editarRetangulo($event, ret.id)"
   />
 
-
-
+  <polygon
+    *ngFor="let est of estrelas"
+    [attr.id]="est.id"
+    [attr.points]="est.pontos"
+    [attr.fill]="est.cor"
+    [attr.stroke]="est.borda"
+    [attr.stroke-width]="est.espessura"
+    (click)="editarEstrela($event, est.id)"
+  />
 </svg>
-<!---
-<svg id="tela" width="1200" height="420">
-  <rect 
-    *ngFor="let ret of retangulos" 
-    [attr.x]="ret.posX"
-    [attr.y]="ret.posY"
-    [attr.width]="ret.largura"
-    [attr.height]="ret.altura"
-    [attr.rx]="ret.curva"
-    [attr.ry]="ret.curva"
-    fill="skyblue"
-    stroke="black"
-    stroke-width="2"
-    [attr.id]="'retangulo-' + ret.id"
-    (click)="editarRetangulo()"
-    style="cursor: pointer;"
-  ></rect>
-</svg>-->
-
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DesenhoService, Retangulo } from '../../services/desenho.service';
+import { DesenhoService, Retangulo, Estrela } from '../../services/desenho.service';
 
 @Component({
   selector: 'app-canvas',
@@ -8,11 +8,16 @@ import { DesenhoService, Retangulo } from '../../services/desenho.service';
 })
 export class CanvasComponent {
   retangulos: Retangulo[] = [];
+  estrelas: Estrela[] = [];
 
   constructor(private desenhoService: DesenhoService) {
 
     this.desenhoService.retangulos$.subscribe((retangulos: Retangulo[]) => {
       this.retangulos = retangulos;
+    });
+
+      this.desenhoService.estrelas$.subscribe((estrelas: Estrela[]) => {
+      this.estrelas = estrelas;
     });
 
   }
@@ -22,7 +27,11 @@ export class CanvasComponent {
     editarRetangulo(event:Event,id:string) {
       event.stopPropagation();
       this.desenhoService.selecionarRetangulo(id);
+
+      this.desenhoService.selecionarEstrela(id);
     }
+
+    editarEstrela(event:Event,id:string) {}
 
     pegarPosicao(event: MouseEvent) {
       const canvas = event.target as HTMLCanvasElement;
