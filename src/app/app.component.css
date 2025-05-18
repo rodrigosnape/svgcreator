@@ -3,3 +3,22 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+.container {
+  display: flex;
+}
+
+.menu {
+  width: 25%;
+  background-color: #f5f5f5;
+  padding: 1rem;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  overflow-y: auto; /* rolagem se necessário */
+   /* ocupa altura total da tela */
+  height: 92vh;
+}
+
+.canvas {
+  width: 75%;
+  padding: 1rem;
+}

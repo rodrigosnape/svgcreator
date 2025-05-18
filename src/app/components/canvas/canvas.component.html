@@ -1,8 +1,8 @@
-<h2>Tela</h2>
-
-
-
-<svg id=tela width="1200" height="420">
+<svg 
+    id=tela 
+    width="1000" height="520"
+    (click)="pegarPosicao($event)"
+    >
   
 
   <rect 
@@ -14,10 +14,10 @@
     [attr.height]="ret.altura"
     [attr.rx]="ret.curva"
     [attr.ry]="ret.curva"
-    fill="#4CAF50"
-    stroke="#ccc"
-    stroke-width="5"
-    (click)="editarRetangulo(ret.id)"
+    [attr.fill]="ret.cor"
+    [attr.stroke]="ret.borda"
+    [attr.stroke-width]="ret.espessura"
+    (click)="editarRetangulo($event,ret.id)"
   />
 
 

@@ -12,6 +12,8 @@ export class MenuComponent implements OnInit {
   retanguloForm!: FormGroup;
   formBuilder: any;
   retanguloSelecionado: boolean = false;
+
+  abaSelecionada: string = 'retangulo';
   
 
   constructor(private desenhoService: DesenhoService) {}
@@ -24,6 +26,9 @@ export class MenuComponent implements OnInit {
         larguraRetangulo: new FormControl(100, Validators.required),
         alturaRetangulo: new FormControl(50, Validators.required),
         curvaRetangulo: new FormControl(0, Validators.required),
+        corRetangulo: new FormControl(0, Validators.required),
+        bordaRetangulo: new FormControl(0, Validators.required),
+        espessuraRetangulo: new FormControl(0, Validators.required),
     });
 
 
@@ -36,13 +41,29 @@ export class MenuComponent implements OnInit {
           larguraRetangulo: ret.largura,
           alturaRetangulo: ret.altura,
           curvaRetangulo: ret.curva,
+          corRetangulo: ret.cor,
+          bordaRetangulo: ret.borda,
+          espessuraRetangulo: ret.espessura
+
         });
 
         this.retanguloSelecionado = true
       }      
     });
 
+    this.desenhoService.posicaoInicial$.subscribe(pos => {
+      this.retanguloForm.patchValue({
+        posXRetangulo: pos.x,
+        posYRetangulo: pos.y
+      });
+    });
+
+
+
+    
+
   }
+
 
   adicionarRetangulo() {
       const retangulo: Retangulo = {
@@ -52,7 +73,10 @@ export class MenuComponent implements OnInit {
       posY: this.retanguloForm.value.posYRetangulo,
       largura: this.retanguloForm.value.larguraRetangulo,
       altura: this.retanguloForm.value.alturaRetangulo,
-      curva: this.retanguloForm.value.curvaRetangulo
+      curva: this.retanguloForm.value.curvaRetangulo,
+      cor: this.retanguloForm.value.corRetangulo,
+      borda: this.retanguloForm.value.bordaRetangulo,
+      espessura: this.retanguloForm.value.espessuraRetangulo
     };
 
     this.desenhoService.adicionarRetangulo(retangulo);
@@ -66,7 +90,10 @@ export class MenuComponent implements OnInit {
       posY: this.retanguloForm.value.posYRetangulo,
       largura: this.retanguloForm.value.larguraRetangulo,
       altura: this.retanguloForm.value.alturaRetangulo,
-      curva: this.retanguloForm.value.curvaRetangulo
+      curva: this.retanguloForm.value.curvaRetangulo,
+      cor: this.retanguloForm.value.corRetangulo,
+      borda: this.retanguloForm.value.bordaRetangulo,
+      espessura: this.retanguloForm.value.espessuraRetangulo
     };
     this.desenhoService.editarRetangulo(this.retanguloForm.value.idRetangulo, retangulo);
 
@@ -91,6 +118,10 @@ export class MenuComponent implements OnInit {
 
     this.retanguloSelecionado = false;
 
+  }
+
+    selecionarAba(aba: 'retangulo' | 'estrela') {
+    this.abaSelecionada = aba;
   }
 
 

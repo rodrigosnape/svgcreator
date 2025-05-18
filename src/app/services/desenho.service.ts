@@ -10,6 +10,9 @@ export interface Retangulo {
   largura: number;
   altura: number;
   curva: number;
+  cor: string;
+  borda: string;
+  espessura: number;
 }
 
 @Injectable({
@@ -26,6 +29,10 @@ export class DesenhoService {
   private retanguloSelecionado = new BehaviorSubject<Retangulo | null>(null);
   
   public retanguloSelecionado$ = this.retanguloSelecionado.asObservable();
+
+
+  public posicaoInicial = new BehaviorSubject<{ x: number, y: number }>({ x: 0, y: 0 });
+  public posicaoInicial$ = this.posicaoInicial.asObservable();
 
 
   constructor() { }
@@ -68,6 +75,9 @@ editarRetangulo(id: string, novosDados: Retangulo) {
       largura: novosDados.largura,
       altura: novosDados.altura,
       curva: novosDados.curva,
+      cor: novosDados.cor,
+      borda: novosDados.borda,
+      espessura: novosDados.espessura
     };
 
     const novaLista = [...lista];

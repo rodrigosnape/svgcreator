@@ -1,34 +1,58 @@
+<div class="tabs">
+  <div class="tab-buttons">
+    <button 
+      [class.active]="abaSelecionada === 'retangulo'" 
+      (click)="selecionarAba('retangulo')">
+      Retângulo
+    </button>
+    <button 
+      [class.active]="abaSelecionada === 'estrela'" 
+      (click)="selecionarAba('estrela')">
+      Estrela
+    </button>
+  </div>
+
+  <div class="tab-content">
+    <div *ngIf="abaSelecionada === 'retangulo'">
 <form [formGroup]="retanguloForm">
-    <input 
-        type="text" 
+     <input 
+        type="hidden" 
         formControlName="idRetangulo"
         value=""
         readonly
+        class="full"
     />
-    <label for="X">X: </label>
-    <input 
-        type="number"
-        formControlName="posXRetangulo" 
-        value="0"
-    />
-    <label for="X">Y: </label>
-    <input 
-        type="number"
-        formControlName="posYRetangulo" 
-        value="0"
-    />
-    <label for="Largura">Largura: </label>
-    <input 
-        type="number"
-        formControlName="larguraRetangulo" 
-        value="0"
-    />
-     <label for="Largura">Altura: </label>
-    <input 
-        type="number"
-        formControlName="alturaRetangulo" 
-        value="0"
-    />
+    <div class="full">
+        <label for="X">X: </label>
+        <input 
+            type="number"
+            formControlName="posXRetangulo" 
+            value="0"
+            id="X"
+        />
+        <label for="Y">Y: </label>
+        <input 
+            type="number"
+            formControlName="posYRetangulo" 
+            value="0"
+        />
+    </div>
+    <div class="full">
+        <label for="largura">Largura: </label>
+        <input 
+            type="number"
+            formControlName="larguraRetangulo" 
+            value="0"
+            id="larguraRetangulo"
+        />
+        <label for="alturaRetangulo">Altura: </label>
+        <input 
+            type="number"
+            formControlName="alturaRetangulo" 
+            value="0"
+            id="alturaRetangulo"
+        />
+    </div>
     <label for="Largura">Curvas: </label>
     <input 
         type="range"
@@ -37,10 +61,40 @@
         step="5"
         formControlName="curvaRetangulo" 
         value="0"
-    />    
+    />
+    <div class="full">
+    <label for="Cor">Cor: </label>
+    <input 
+        type="color"
+        formControlName="corRetangulo" 
+        value=""
+    />
+    <label for="Borda">Borda: </label>
+    <input 
+        type="color"
+        formControlName="bordaRetangulo" 
+        value=""
+    />
+    </div>
+    <label for="Espessura">Espessura: </label>
+    <input 
+        type="range"
+        min="0"
+        max="10"
+        step="1"
+        formControlName="espessuraRetangulo" 
+        value=""
+    />
+    
+
     <button *ngIf="!retanguloSelecionado" class="adicionar" (click)="adicionarRetangulo()">Adicionar Retângulo</button>
     <button *ngIf="retanguloSelecionado" class="editar" (click)="editarRetangulo()">Editar Retângulo</button>
     <button *ngIf="retanguloSelecionado" class="remover" (click)="removerRetangulo()">Remover Retângulo</button>
 </form>
+    </div>
 
-<button class="adicionar">Adicionar Polígono</button>
+    <div *ngIf="abaSelecionada === 'estrela'">
+      <button class="adicionar">Adicionar Polígono</button>
+    </div>
+  </div>
+</div>
