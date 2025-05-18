@@ -56,14 +56,39 @@ export class DesenhoService {
 
   
 
-  editarRetangulo(id: string, retangulo: Retangulo) {
+editarRetangulo(id: string, novosDados: Retangulo) {
+  const lista = this.retangulosLista.getValue();
+  const index = lista.findIndex(r => r.id === id);
+
+  if (index !== -1) {
+    const retanguloAtualizado = {
+      ...lista[index],
+      posX: novosDados.posX,
+      posY: novosDados.posY,
+      largura: novosDados.largura,
+      altura: novosDados.altura,
+      curva: novosDados.curva,
+    };
+
+    const novaLista = [...lista];
+    novaLista[index] = retanguloAtualizado;
+
+    this.retangulosLista.next(novaLista);
+    this.retanguloSelecionado.next(retanguloAtualizado);
+
+    console.log('retanguloEditado', retanguloAtualizado);
   }
+}
+
+
 
   removerRetangulo(id: string) {
     const listaAtual = this.retangulosLista.getValue();
     const novaLista = listaAtual.filter(r => r.id !== id);
 
     this.retangulosLista.next(novaLista);
+
+    this.retanguloSelecionado.next(null);
   }
 }
 

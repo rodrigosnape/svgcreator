@@ -11,6 +11,8 @@ export class MenuComponent implements OnInit {
 
   retanguloForm!: FormGroup;
   formBuilder: any;
+  retanguloSelecionado: boolean = false;
+  
 
   constructor(private desenhoService: DesenhoService) {}
 
@@ -27,7 +29,7 @@ export class MenuComponent implements OnInit {
 
     this.desenhoService.retanguloSelecionado$.subscribe(ret => {
       if (ret) {
-        this.retanguloForm.patchValue({
+          this.retanguloForm.patchValue({
           idRetangulo: ret.id,
           posXRetangulo: ret.posX,
           posYRetangulo: ret.posY,
@@ -35,7 +37,9 @@ export class MenuComponent implements OnInit {
           alturaRetangulo: ret.altura,
           curvaRetangulo: ret.curva,
         });
-      }
+
+        this.retanguloSelecionado = true
+      }      
     });
 
   }
@@ -54,8 +58,38 @@ export class MenuComponent implements OnInit {
     this.desenhoService.adicionarRetangulo(retangulo);
   }
 
+  editarRetangulo() {
+     const retangulo: Retangulo = {
+      id: this.retanguloForm.value.idRetangulo,
+      tipo: 'retangulo',
+      posX: this.retanguloForm.value.posXRetangulo,
+      posY: this.retanguloForm.value.posYRetangulo,
+      largura: this.retanguloForm.value.larguraRetangulo,
+      altura: this.retanguloForm.value.alturaRetangulo,
+      curva: this.retanguloForm.value.curvaRetangulo
+    };
+    this.desenhoService.editarRetangulo(this.retanguloForm.value.idRetangulo, retangulo);
+
+    this.resetarForm();
+  }
+
   removerRetangulo() {
     this.desenhoService.removerRetangulo(this.retanguloForm.value.idRetangulo);
+    this.resetarForm();
+  }
+
+  resetarForm() {
+    this.retanguloForm.reset({
+      idRetangulo: '',
+      tipo: 'retangulo',
+      posXRetangulo: 0,
+      posYRetangulo: 0,
+      larguraRetangulo: 100,
+      alturaRetangulo: 50,
+      curvaRetangulo: 0,
+    });
+
+    this.retanguloSelecionado = false;
 
   }
 

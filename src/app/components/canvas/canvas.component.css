@@ -1,9 +1,9 @@
 #tela{
-    border: 5px solid black;
-    border-radius: 20px;
+    border: 1px solid black;
+    
     filter: drop-shadow(0 0 3px gray);
     background-color: white;
-    padding: 20px;
+    
 }
 
 svg{

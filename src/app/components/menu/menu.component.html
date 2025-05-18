@@ -38,9 +38,9 @@
         formControlName="curvaRetangulo" 
         value="0"
     />    
-    <button class="adicionar" (click)="adicionarRetangulo()">Adicionar Retângulo</button>
-    <!--<button class="editar" (click)="editarRetangulo(1)">Editar Retângulo</button>-->
-    <button class="remover" (click)="removerRetangulo()">Remover Retângulo</button>
+    <button *ngIf="!retanguloSelecionado" class="adicionar" (click)="adicionarRetangulo()">Adicionar Retângulo</button>
+    <button *ngIf="retanguloSelecionado" class="editar" (click)="editarRetangulo()">Editar Retângulo</button>
+    <button *ngIf="retanguloSelecionado" class="remover" (click)="removerRetangulo()">Remover Retângulo</button>
 </form>
 
 <button class="adicionar">Adicionar Polígono</button>
