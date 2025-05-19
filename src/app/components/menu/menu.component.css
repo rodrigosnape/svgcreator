@@ -34,7 +34,6 @@
 }
 
 .tab-buttons button.active {
-  //border-bottom: 2px solid #007BFF;
   color: #fff;
   background-color: #ccc;
 }

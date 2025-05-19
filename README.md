@@ -55,10 +55,14 @@ nvm use 20
 ```bash
 npm install
 ```
-- Para exegutar, digite
+- Para executar, digite
 ```bash
 ng serve -o
 ```
+
+## Demonstração
+
+https://rodrigoveiga.com.br/sandbox/svgcreator/
 
 
 
