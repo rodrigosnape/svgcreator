@@ -61,4 +61,9 @@ export class CanvasComponent {
       return { x, y };
     }
 
+    limparTela(){
+      this.desenhoService.limparTela();
+      this.elementoSelecionado?.classList.remove('selecionado');
+    }
+
   }

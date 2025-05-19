@@ -14,3 +14,16 @@ svg rect,
 svg polygon{
     cursor: pointer;
 }
+
+button{
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #ccc;
+  transition: background-color 0.3s;
+}

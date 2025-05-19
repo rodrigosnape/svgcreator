@@ -1,3 +1,4 @@
+
 <svg id="tela" width="1000" height="520" (click)="pegarPosicao($event)">
   <rect
     *ngFor="let ret of retangulos"
@@ -24,4 +25,5 @@
     (click)="editarEstrela($event, est.id)"
   />
 </svg>
+<button (click)="limparTela()">Limpar Tela</button>
 

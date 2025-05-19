@@ -203,6 +203,13 @@ export class DesenhoService {
 
     this.estrelaSelecionada.next(null);
   }
+
+  limparTela() {
+    this.retangulosLista.next([]);
+    this.estrelasLista.next([]);
+    this.retanguloSelecionado.next(null);
+    this.estrelaSelecionada.next(null);
+  }
 }
 
 
